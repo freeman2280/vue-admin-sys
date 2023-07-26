@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cr.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cr.pojo.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="city" property="city" />
+        <result column="created" property="created" />
+        <result column="updated" property="updated" />
+        <result column="last_login" property="lastLogin" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="is_account_non_expired" property="isAccountNonExpired" />
+        <result column="is_account_non_locked" property="isAccountNonLocked" />
+        <result column="is_credentials_non_expired" property="isCredentialsNonExpired" />
+        <result column="is_enabled" property="isEnabled" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, avatar, email, city, created, updated, last_login, is_deleted, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled
+    </sql>
+    <select id="getAllMenusByUserID" resultType="com.cr.pojo.Menu">
+        SELECT DISTINCT sys_menu.`id` ,sys_menu.`parent_id`,sys_menu.`name`,sys_menu.`path`,sys_menu.`perms`,sys_menu.`component`,sys_menu.`type`,sys_menu.`icon`,sys_menu.`orderNum`,sys_menu.`statu`,sys_menu.`remark` FROM `sys_user`
+        LEFT JOIN `sys_user_role` ON `sys_user`.id=`sys_user_role`.user_id
+        LEFT JOIN `sys_role_menu` ON `sys_user_role`.`role_id`=`sys_role_menu`.`role_id`
+        LEFT JOIN `sys_menu` ON `sys_role_menu`.`menu_id`=`sys_menu`.`id`
+        WHERE `sys_user`.`id`=#{id}
+    </select>
+
+</mapper>

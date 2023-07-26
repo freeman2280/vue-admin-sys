@@ -1,0 +1,28 @@
+server:
+  servlet:
+    context-path: /vue-admin
+  port: 8090
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/vue-admin-sys?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: root
+#redis
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    password: root
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Asia/Shanghai
+logging:
+  level:
+    com.cr.mapper: debug
+#自定义数据
+url:
+  white_list: /api/user/login,/api/getKaptcha,/api/user/logout,/logout
+
+
